@@ -66,7 +66,7 @@ def register():
 @app.route('/product/<id>')
 def product(id):
     form = CartForm()
-    del_prod=DeleteProduct()
+    del_prod = DeleteProduct()
     product = Product.query.filter_by(id=id).first_or_404()
     return render_template('product.html', product=product, form=form, del_prod=del_prod)
 
@@ -200,4 +200,3 @@ def delete_product():
         flash('You  product delete')
         return redirect(url_for('index'))
     return render_template('index.html')
-

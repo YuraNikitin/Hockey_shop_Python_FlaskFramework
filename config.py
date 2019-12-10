@@ -8,4 +8,4 @@ class Config(object):
                               'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
-    PRODUCT_PER_PAGE = 5
+    PRODUCT_PER_PAGE = 12

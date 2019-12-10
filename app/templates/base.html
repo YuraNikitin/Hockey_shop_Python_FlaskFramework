@@ -54,7 +54,12 @@
             <a class="nav-link" href="{{ url_for('user' , username = current_user.username ) }}">Профиль</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('cart')}}">Корзина</a>
+            <a class="nav-link" href="{{ url_for('cart')}}">Корзина
+            {% set count_prod = current_user.count_products_inCart() %}
+            {%  if count_prod  %}
+              <span class="badge">{{ count_prod }}</span>
+            {% endif %}
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('logout') }}">Выход</a>

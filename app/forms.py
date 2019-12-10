@@ -1,5 +1,4 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
 from app.models import User
@@ -39,7 +38,7 @@ class RegistrationForm(EditProfileForm, FlaskForm):
 
 class CartForm(FlaskForm):
     product_id = StringField('Product id')
-    count_prod = StringField('Please select quanity: ', validators=[DataRequired()])
+    count_prod = StringField('Укажите кол-во: ', validators=[DataRequired()])
     submit = SubmitField('Add')
 
 

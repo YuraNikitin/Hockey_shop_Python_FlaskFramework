@@ -2,7 +2,7 @@ from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import login
-
+from flask_login import current_user
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,6 +24,8 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    def count_products_inCart(self):
+        return CartItems.query.filter_by(user_id=current_user.id).count()
 
 
 class Role(db.Model):
@@ -63,7 +65,9 @@ class CartItems(db.Model):
     product = db.relationship('Product', lazy='joined')
 
     def __repr__(self):
-        return '< Product item {} >'.format(self.id)
+        return '< Product item {} , user_id {}, prod_id {}>'.format(self.id,self.user_id,self.product_id)
+
+
 
 
 @login.user_loader
