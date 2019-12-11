@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<link href="{{ url_for('static', filename = 'vendor/bootstrap/css/tables.css') }}" rel="stylesheet">
+<section>
+  <h1>Корзина</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+      <tr>
+        <th>Наименование</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Итог</th>
+        <th></th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  {% for items in item %}
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+      <tr>
+        <td>{{ items.product.name }}</td>
+        <td>{{ items.product.price }} </td>
+        <td>{{ items.count }}</td>
+        <td>{{ price_product[items.id] }}</td>
+        <td>
+          <form action="/delete_position" method="post" novalidate>
+            {{ form.hidden_tag () }}
+            <div style="display: none">
+              {{ cart_item_form.item_id.label }}
+              {{ cart_item_form.item_id(value=items.id) }}
+            </div>
+            <button class="login100-form-btn">
+              Удалить позицию
+            </button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    {% endfor %}
+  </div>
+</section>
+<table>
+  <tr>
+    <td><h3> Общая сумма: {{ total_sum }}</h3></td>
+    <td>
+      <form action="/delete_product" method="post" novalidate>
+        {{ cart_item_delete_all.hidden_tag () }}
+        <button class="login100-form-btn">
+          Очистить корзину
+        </button >
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

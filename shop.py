@@ -1,6 +1,7 @@
 from app import app, db
-from app.models import User, Product, CartItems, CategoryProduct,Role
-
+from app.models.User import User, Role
+from app.models.Cart import CartItems
+from app.models.Product import Product, CategoryProduct
 
 @app.shell_context_processor
 def make_shell_context():

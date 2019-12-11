@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+            <form class="login100-form validate-form" action="" method="post" novalidate>
+                <span class="login100-form-title p-b-33">
+                    Вход
+                </span>
+                {{ form.hidden_tag () }}
+                <div class="wrap-input100 validate-input" >
+                    <p>
+                        {{ form. username.label }} <br>
+                        {{ form.username(size = 52) }}
+                    </p>
+                    {% for error in form.username.errors %}
+                    <span style="color:red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div class="wrap-input100 rs1 validate-input">
+                    <p>
+                        {{ form.password.label }} <br>
+                        {{ form.password(size = 52) }}
+                    </p>
+                    {% for error in form.password.errors %}
+                    <span style="color:red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div class="container-login100-form-btn m-t-20">
+                    <button class="login100-form-btn">
+							Вход
+                    </button>
+                </div>
+                <br><div class="text-center">
+                <br><p> {{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                <span class="txt1">Новый пользователь? Зарегистрируйся сейчас!</span>
+                <a href="{{ url_for('register')}}" class="txt2 hov1">
+                    Регистрация
+                </a>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}
