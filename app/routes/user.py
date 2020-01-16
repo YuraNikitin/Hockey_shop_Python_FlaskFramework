@@ -5,6 +5,7 @@ from flask_login import current_user, login_user, logout_user
 from app.models.User import User
 from app import db
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -17,7 +18,7 @@ def login():
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index'))
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('User/login.html', title='Sign In', form=form)
 
 
 @app.route('/logout')
@@ -39,12 +40,13 @@ def register():
         db.session.commit()
         flash("GREAT your are now registered user!")
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('User/register.html', title='Register', form=form)
+
 
 @app.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user)
+    return render_template('User/user.html', user=user)
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -66,4 +68,4 @@ def edit_profile():
         form.email.data = current_user.email
         form.address.data = current_user.address
 
-    return render_template('edit_profile.html', title='Edit profile', form=form)
+    return render_template('User/edit_profile.html', title='Edit profile', form=form)

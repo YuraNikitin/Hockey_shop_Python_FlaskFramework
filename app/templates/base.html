@@ -6,24 +6,24 @@
   <meta name="description" content="">
   <meta name="author" content="">
   {% if title %}
-  <title>{{ title }} </title>
+    <title>{{ title }} </title>
   {% else %}
-  <title>Hockey Shop</title>
+    <title>Hockey Shop</title>
   {% endif %}
-
   <!-- Bootstrap core CSS -->
   <link href="{{ url_for('static', filename = 'vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="{{ url_for('static', filename = 'css/shop-homepage.css') }}" rel="stylesheet">
-  <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename = 'css/main.css')}}">
+  <link href="{{ url_for('static', filename = 'vendor/bootstrap/css/style.css') }}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/util.css')}}">
+  <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename = 'css/main.css')}}">
 </head>
 <body>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-indigo bg-dark fixed-top">
   <div class="container">
     {% if current_user.is_authenticated %}
-    <h2 class="m-0  text-white">  Hello, {{ current_user.username }}!  </h2>
+      <h2 class="m-0  text-white">  Hello, {{ current_user.username }}!  </h2>
     {% endif %}
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,50 +36,50 @@
         </li>
 
         {% if current_user.is_anonymous %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login') }}">Вход</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Вход</a>
+          </li>
         {% endif %}
 
         {% if current_user.role_id == 2 %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('user' , username = current_user.username ) }}">Профиль</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('cart')}}">Корзина
-            {% set count_prod = current_user.count_products_inCart() %}
-            {%  if count_prod  %}
-            <span class="badge">{{ count_prod }}</span>
-            {% endif %}
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('logout') }}">Выход</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('user' , username = current_user.username ) }}">Профиль</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('cart')}}">Корзина
+              {% set count_prod = current_user.count_products_inCart() %}
+              {%  if count_prod  %}
+                <span class="badge">{{ count_prod }}</span>
+              {% endif %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Выход</a>
+          </li>
         {% endif %}
         {% if current_user.role_id == 1 %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('user' , username = current_user.username ) }}">Профиль</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('logout') }}">Выход</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('add_product')}}">Добавить товар</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('user' , username = current_user.username ) }}">Профиль</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Выход</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('add_product')}}">Добавить товар</a>
+          </li>
         {% endif %}
       </ul>
     </div>
   </div>
 </nav>
 {% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul>
-  {% for message in messages %}
-  <li>{{ message }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endwith %}
 
 {% block content %}
@@ -92,5 +92,8 @@
     </div>
   </div>
 </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

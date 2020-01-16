@@ -23,7 +23,7 @@ def cart():
         for i in item:
             price_product[i.id] = i.product.price * i.count
         total_sum = sum(price_product.values())
-        return render_template('cart.html', title='Cart', item=item, total_sum=total_sum, price_product=price_product,
+        return render_template('Cart/cart.html', title='Cart', item=item, total_sum=total_sum, price_product=price_product,
                                form=form, cart_item_form=cart_item_form, cart_item_delete_all=cart_item_delete_all)
 
 
@@ -33,9 +33,9 @@ def delete():
     if form.validate_on_submit():
         db.session.query(CartItems).filter_by(user_id=current_user.id).delete()
         db.session.commit()
-        flash('You  product delete in cart')
+        flash('You  product delete All in cart')
         return redirect(url_for('cart'))
-    return render_template('cart.html')
+    return render_template('Cart/cart.html')
 
 
 @app.route('/delete_position', methods=['GET', 'POST'])
@@ -46,4 +46,4 @@ def delete_position():
         db.session.commit()
         flash('You  product delete in cart')
         return redirect(url_for('cart'))
-    return render_template('cart.html')
+    return render_template('Cart/cart.html')

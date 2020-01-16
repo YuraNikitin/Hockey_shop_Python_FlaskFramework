@@ -7,9 +7,9 @@
         <div class="col-lg-3">
             <h1 class="my-4">Hockey shop</h1>
             {% for item in category %}
-            <div class="list-group">
-                <a href="{{ url_for('index', category_id = item.id )}}" class="list-group-item"> {{ item.category_name }} </a>
-            </div>
+                <div class="list-group">
+                    <a href="{{ url_for('index', category_id = item.id )}}" class="list-group-item"> {{ item.category_name }} </a>
+                </div>
             {% endfor %}
         </div>
 
@@ -49,35 +49,35 @@
 
             <div class="row">
                 {% for item in items %}
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="/static/images/{{ item.image }}" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="{{ url_for('product', id = item.id ) }}">{{item.name}}</a>
-                            </h4>
-                            <h5>{{item.price}} руб.</h5>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="/static/images/{{ item.image }}" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="{{ url_for('product', id = item.id ) }}">{{item.name}}</a>
+                                </h4>
+                                <h5>{{item.price}} руб.</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
             <ul class="pager">
                 <li class="previous" >
                     {% if prev_url %}
-                    <a href=" {{ prev_url or '#' }}">
-                        <span aria-hidden="true" > &larr; Newer product's</span>
-                    </a>
+                        <a href=" {{ prev_url or '#' }}">
+                            <span aria-hidden="true" > &larr; Newer product's</span>
+                        </a>
                     {% endif %}
                 </li>
                 <li class="next" >
                     {% if next_url %}
-                    <a href=" {{ next_url or '#' }}">
-                        <span aria-hidden=" true"> &rarr; Older product's</span>
-                    </a>
+                        <a href=" {{ next_url or '#' }}">
+                            <span aria-hidden=" true"> &rarr; Older product's</span>
+                        </a>
                     {% endif %}
                 </li>
             </ul>

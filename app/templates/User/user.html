@@ -20,11 +20,12 @@
                 <p> Address: {{ user.address }}</p>
             </span>
             {% if user == current_user %}
-            <span class="login100-form-title p-b-33"><p>
-                   У вас есть изменения??
-                <a href=" {{ url_for('edit_profile') }} ">Нажмите сюда!</a>
-            </p>
-            </span>
+                <span class="login100-form-title p-b-33">
+                    <p>
+                        У вас есть изменения??
+                        <a href=" {{ url_for('edit_profile') }} ">Нажмите сюда!</a>
+                    </p>
+                </span>
             {% endif %}
         </span>
     </div>

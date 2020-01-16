@@ -31,7 +31,7 @@ def product(id):
     form = CartForm()
     del_prod = DeleteProduct()
     product = Product.query.filter_by(id=id).first_or_404()
-    return render_template('product.html', product=product, form=form, del_prod=del_prod)
+    return render_template('Product/product.html', product=product, form=form, del_prod=del_prod)
 
 
 @app.route('/add_product', methods=['GET', 'POST'])
@@ -55,7 +55,7 @@ def add_product():
         return redirect(url_for('index'))
     else:
         form.category.choices = [(c.id, c.category_name) for c in CategoryProduct.query.order_by('id')]
-    return render_template('add_product.html', title='ADD', form=form)
+    return render_template('Product/add_product.html', title='ADD', form=form)
 
 
 @app.route('/edit_product/<id>', methods=['GET', 'POST'])
@@ -80,7 +80,7 @@ def edit_product(id):
         form.price.data = product.price
         form.description.data = product.description
         form.category.data = product.category_id
-    return render_template('edit_product.html', title='Edit profile', form=form, product=product)
+    return render_template('Product/edit_product.html', title='Edit profile', form=form, product=product)
 
 
 @app.route('/delete_product', methods=['GET', 'POST'])

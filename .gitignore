@@ -1,5 +1,8 @@
-# Ignore directory
 venv/
+
+migrations/
+
+**/__pycache__/
 
 #Ignore file database
 *.db
@@ -13,4 +16,7 @@ venv/
 #Ignore specfiles
 __pycache__/
 
-app/__pycache__/
+**/*.pyc
+
+#Ignore jpg files
+**/*.jpg

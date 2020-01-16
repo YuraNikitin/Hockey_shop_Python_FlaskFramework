@@ -12,39 +12,39 @@
                     <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
                     5.0 stars<br>
                     {% if current_user.is_anonymous == False and current_user.role_id != 1 %}
-                    <br><form action="/cart" method="post">
-                    {{ form.hidden_tag () }}
-                    <div style="display: none">
-                        {{ form.product_id.label }}
-                        {{ form.product_id(value=product.id) }}
-                    </div>
-                    <span class="text-warning">
-                        <p>
-                            {{ form.count_prod.label }}
-                            {{ form.count_prod(value=1) }}
-                        </p>
-                        <button class="login100-form-btn">
-                            Добавить в корзину
-                        </button>
-                    </span>
-                </form>
+                        <br><form action="/cart" method="post">
+                            {{ form.hidden_tag () }}
+                            <div style="display: none">
+                                {{ form.product_id.label }}
+                                {{ form.product_id(value=product.id) }}
+                            </div>
+                            <span class="text-warning">
+                                <p>
+                                    {{ form.count_prod.label }}
+                                    {{ form.count_prod(value=1) }}
+                                </p>
+                            <button class="login100-form-btn">
+                                Добавить в корзину
+                            </button>
+                            </span>
+                        </form>
                     {% endif %}
                     {% if current_user.role_id == 1 %}
-                    <span class="login100-form-title p-b-33">
-                        <p>
-                            <a href=" {{url_for('edit_product', id=product.id)}}">Изменить информацию о товаре</a>
-                        </p>
-                    </span>
-                    <form action="/delete_product" method="post" >
-                        {{ del_prod.hidden_tag () }}
-                        <div style="display: none">
-                            {{ del_prod.product_id.label }}
-                            {{ del_prod.product_id(value=product.id) }}
-                        </div>
-                        <button class="login100-form-btn">
-                            Удалить продукт
-                        </button>
-                    </form>
+                        <span class="login100-form-title p-b-33">
+                            <p>
+                                <a href=" {{url_for('edit_product', id=product.id)}}">Изменить информацию о товаре</a>
+                            </p>
+                        </span>
+                        <form action="/delete_product" method="post" >
+                            {{ del_prod.hidden_tag () }}
+                            <div style="display: none">
+                                {{ del_prod.product_id.label }}
+                                {{ del_prod.product_id(value=product.id) }}
+                            </div>
+                            <button class="login100-form-btn">
+                                Удалить продукт
+                            </button>
+                        </form>
                     {% endif %}
                 </div>
             </div>
