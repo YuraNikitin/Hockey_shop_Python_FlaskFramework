@@ -1,48 +1,59 @@
-from flask import render_template, flash, redirect, url_for, request
-from werkzeug.utils import secure_filename
 import os
-from app import app
-from app.forms.cart import CartForm
-from app.forms.Product import DeleteProduct, AddProduct
+
+from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user
-from app.models.Product import Product, CategoryProduct
+from werkzeug.utils import secure_filename
+
+from app import app
 from app import db
+from app.forms.cart import CartForm
+from app.forms.product import DeleteProduct, AddProduct
+from app.models.product import Product, CategoryProduct
 
 
 @app.route('/', defaults={'category_id': None})
 @app.route('/index/<int:category_id>', methods=['GET', 'POST'])
 def index(category_id):
     page = request.args.get('page', 1, type=int)
+
     if category_id is not None:
-        products = Product.query.filter_by(category_id=category_id).paginate(page, app.config['PRODUCT_PER_PAGE'],
-                                                                             False)
+        products = Product.query.filter_by(category_id=category_id).paginate(
+            page, app.config['PRODUCT_PER_PAGE'], False
+        )
         next_url = url_for('index', category_id=category_id, page=products.next_num) if products.has_next else None
         prev_url = url_for('index', category_id=category_id, page=products.prev_num) if products.has_prev else None
     else:
         products = Product.query.paginate(page, app.config['PRODUCT_PER_PAGE'], False)
         next_url = url_for('index', page=products.next_num) if products.has_next else None
         prev_url = url_for('index', page=products.prev_num) if products.has_prev else None
-    return render_template('index.html', title='Home page', items=products.items,
-                           category=CategoryProduct.query.all(), next_url=next_url, prev_url=prev_url)
+
+    return render_template(
+        'index.html', title='Home page', items=products.items, category=CategoryProduct.query.all(),
+        next_url=next_url, prev_url=prev_url
+    )
 
 
 @app.route('/product/<id>')
-def product(id):
+def show_product(id):
     form = CartForm()
     del_prod = DeleteProduct()
     product = Product.query.filter_by(id=id).first_or_404()
+
     return render_template('Product/product.html', product=product, form=form, del_prod=del_prod)
 
 
 @app.route('/add_product', methods=['GET', 'POST'])
 def add_product():
     form = AddProduct()
+
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
         file = request.files['file']
+
         if file.filename == '':
             flash('No selected file')
+
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 

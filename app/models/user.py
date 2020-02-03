@@ -1,12 +1,14 @@
-from app import db
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from app import login
 from flask_login import current_user
-from app.models.Cart import CartItems
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from app import db
+from app import login
+from app.models.cart import CartItems
 
 
 class User(UserMixin, db.Model):
+    """This model User's, contains following fields:"""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     name = db.Column(db.String(64))
@@ -18,24 +20,26 @@ class User(UserMixin, db.Model):
     role = db.relationship('Role', lazy='joined')
 
     def __repr__(self):
-        return '<User:{}, surname: {}, name: {}, address:{}, email: {}'.format(self.username, self.surname, self.name,
-                                                                               self.address, self.email)
+        return '<User:{}, surname: {}, name: {}, address:{}, email: {}'.format(
+            self.username, self.surname, self.name, self.address, self.email)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-    def count_products_inCart(self):
+
+    def count_products_cart(self):
         return CartItems.query.filter_by(user_id=current_user.id).count()
 
 
 class Role(db.Model):
+    """This model user Role, contains following fields:"""
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
 
     def __repr__(self):
-        return '<  name: {}, id:{}'.format( self.name, self.id)
+        return '<  name: {}, id:{}'.format(self.name, self.id)
 
 
 @login.user_loader

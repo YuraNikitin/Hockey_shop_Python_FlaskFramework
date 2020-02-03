@@ -54,7 +54,7 @@
                             <img class="card-img-top" src="/static/images/{{ item.image }}" alt="">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="{{ url_for('product', id = item.id ) }}">{{item.name}}</a>
+                                    <a href="{{ url_for('show_product', id = item.id ) }}">{{item.name}}</a>
                                 </h4>
                                 <h5>{{item.price}} руб.</h5>
                             </div>

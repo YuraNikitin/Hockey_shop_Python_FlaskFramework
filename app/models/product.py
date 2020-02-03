@@ -2,6 +2,7 @@ from app import db
 
 
 class CategoryProduct(db.Model):
+    """This model Category Product's, contains following fields:"""
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(128))
 
@@ -10,6 +11,7 @@ class CategoryProduct(db.Model):
 
 
 class Product(db.Model):
+    """This model Product's, contains following fields:"""
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
     price = db.Column(db.Integer)

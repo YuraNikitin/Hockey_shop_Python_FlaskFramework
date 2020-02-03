@@ -1,10 +1,12 @@
 from app import app, db
-from app.models.User import User, Role
-from app.models.Cart import CartItems
-from app.models.Product import Product, CategoryProduct
+from app.models.cart import CartItems
+from app.models.product import Product, CategoryProduct
+from app.models.user import User, Role
 
 
 @app.shell_context_processor
 def make_shell_context():
-    return {'db': db, 'User': User, 'Product': Product, 'CartItems': CartItems, 'CategoryProduct': CategoryProduct,
-            'Role': Role}
+    return {
+        'db': db, 'User': User, 'Product': Product, 'CartItems': CartItems,
+        'CategoryProduct': CategoryProduct, 'Role': Role
+    }

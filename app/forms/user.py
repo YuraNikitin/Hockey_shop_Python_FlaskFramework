@@ -1,10 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from app.models.User import User
+
+from app.models.user import User
 
 
 class LoginForm(FlaskForm):
+    """This form authorization, contains following fields:"""
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember me')
@@ -12,6 +14,7 @@ class LoginForm(FlaskForm):
 
 
 class EditProfileForm(FlaskForm):
+    """This form to edit profile user's, contains following fields:"""
     username = StringField('New username', validators=[DataRequired()])
     name = StringField('Name', validators=[DataRequired()])
     surname = StringField('Surname', validators=[DataRequired()])
@@ -21,8 +24,9 @@ class EditProfileForm(FlaskForm):
 
 
 class RegistrationForm(EditProfileForm, FlaskForm):
+    """This form to registration user's, contains following fields:"""
     password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Repeat password', validators=[DataRequired(), EqualTo('password')])
+    second_password = PasswordField('Repeat password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
     def validate_username(self, username):
